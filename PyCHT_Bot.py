@@ -49,7 +49,7 @@ class Bot(object):
                                  "/commands Zeigt dir in einer kurzen Beschreibung alles an was ich machen kann\n"
                                  "/help ... nun ja du hast es ja gerade genutzt ... also ja ... \n"
                                  "Versuch dich einfach etwas auszutoben, vielleicht antworte ich ja auch zu manchem ? ;D")
-        elif Text == "\commands":
+        elif Text == "/commands":
             self.sendMessage(ID, "/uhrzeit - Bekomme die Uhrzeit gesagt\n"
                                  "/commands - Siehe was ich schon alles kann!\n"
                                  "/help - HILFE ! Ich erkläre dir was ich alles machen kann ;)")
