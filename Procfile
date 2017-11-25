@@ -1,1 +1,1 @@
-web: python PyCHT_Bot.py -p $PORT
+worker: python PyCHT_Bot.py -p $PORT
