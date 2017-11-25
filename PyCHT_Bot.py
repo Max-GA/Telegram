@@ -11,7 +11,7 @@ class Bot(object):
     def __init__(self):
         self.Contacts = Profiles.Contacts()
         self.URL = "https://api.telegram.org/bot433782927:AAGhtZEFd6mx59OAHMiGROlV7R4_xgxILZI/"
-        self.Conversations = self.loadConversations()
+        self.Conversations = self.Contacts.getIDs()
         self.Handling_IDs = []
         self.Last_Result = None
         self.Update_ID = int
