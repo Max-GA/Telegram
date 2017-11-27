@@ -114,10 +114,16 @@ class Bot(object):
                         self.Contacts.resetSchool(Chat_ID)
                         self.Update_ID = new_Update_ID
                         return False
-            if int(self.Contacts.getGrade(Chat_ID)) > 10:
-                self.sendMessage(Chat_ID, "Now I need your Advanced Courses\nPlease write them in the following format:\n\nCourse1 - Number(if important)\nCourse2\nCourse3 - Number(if important)\n...")
-            else:
-                self.sendMessage(Chat_ID, "Now I need our Main Courses\nPlease write them in the following format:\n\nCourse1 - Number(if important)\nCourse2\nCourse3 - Number(if important)\n...")
+            try:
+                if int(self.Contacts.getGrade(Chat_ID)) > 10:
+                    self.sendMessage(Chat_ID, "Now I need your Advanced Courses\nPlease write them in the following format:\n\nCourse1 - Number(if important)\nCourse2\nCourse3 - Number(if important)\n...")
+                else:
+                    self.sendMessage(Chat_ID, "Now I need our Main Courses\nPlease write them in the following format:\n\nCourse1 - Number(if important)\nCourse2\nCourse3 - Number(if important)\n...")
+            except ValueError:
+                self.sendMessage(Chat_ID, "Sorry, but I don´t think you've entered a valid grade\nAs I said : a NUMBER would be great :)\nPlease try again")
+                self.Contacts.resetSchool(Chat_ID)
+                self.Update_ID = Update_ID
+                return False
             while not first_courses:
                 new_Result = self.lastUpdate(self.getUpdates_Json())
                 new_Update_ID = self.getUpdateID(new_Result)
