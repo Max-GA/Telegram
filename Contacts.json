@@ -1,1 +1,1 @@
-{"contacts": [{"name": "Max", "id": 479932309}]}
+{"contacts": [{"name": "Max", "id": 479932309, "school": true, "grade": "13", "main_courses": {"0_course": "M2", "1_course": "Inf", "2_course": "E1"}, "other_courses": {"0_course": "Ch", "1_course": "Et1", "2_course": "D1", "3_course": "G3", "4_course": "Bk2", "5_course": "Sp3", "6_course": "Eso3", "7_course": "L"}}]}
