@@ -198,15 +198,11 @@ class Bot(object):
             self.Update_ID = Update_ID
         else:
 
-            page = html.fromstring(urllib.request.urlopen(self.School_URL + "?klasse=" + self.Contacts.getGrade(Chat_ID)).read())
-            TITLE = page.xpath("//table//td")
+            page = html.fromstring(urllib.request.urlopen(self.School_URL + "?klasse=" + self.Contacts.getGrade(Chat_ID)).read().decode("utf-8"))
             DATA = page.xpath("//table//td")
             start_var = 0
             INFORMATION = []
 
-            # LOOP FOR MORE INFO IN TABLE , ALWAYS 7 STEPS
-            # INFO IN TEXT
-            # AUSGABE
             if len(DATA[0]) > 5:
                 self.sendMessage(Chat_ID, "Important Information for this Day")
                 self.sendMessage(Chat_ID, str(DATA[0].text))
@@ -232,11 +228,11 @@ class Bot(object):
                     if row[7] == "frei":
                         text = "Your subject {} is being cancelled in the {} lesson".format(row[2], row[0])
                     else:
-                        if row[0] == 1:
+                        if row[0] == "1":
                             text = text + """In the 1st lesson\n"""
-                        elif row[0] == 2:
+                        elif row[0] == "2":
                             text = text + """In the 2nd lesson\n"""
-                        elif row[0] == 3:
+                        elif row[0] == "3":
                             text = text + """In the 3rd lesson\n"""
                         else:
                             text = text + """In the {}th lesson\n""".format(row[0])
@@ -260,16 +256,6 @@ class Bot(object):
 
                         text = text + "\nInformation : {}".format(row[7])
                     self.sendMessage(Chat_ID, text)
-
-
-
-
-        """
-            In the 1st lesson\n
-            Your subject g3 is replaced by e1 in room 301 with Ve as the Teacher
-            Instead of g4
-            Information : frei
-        """
 
     def getUpdates_Json(self, clear = False):
         if clear:

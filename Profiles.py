@@ -10,15 +10,15 @@ class Contacts(object):
             self.setJson(DATA)
 
     def shortCourse(self, id, course, main=True):
-        if course == "Englisch" or course == "englisch" or course == "English" or course == "english":
+        if course.upper() == "ENGLISCH" or course.upper() == "ENGLISH" or course.upper() == "E":
             return "E"
-        elif course == "Mathe" or course == "mathe" or course == "Maths" or course == "maths":
+        elif course.upper() == "MATHE" or course.upper() == "MATHS" or course.upper() == "M":
             return "M"
-        elif course == "Deutsch" or course == "deutsch" or course == "German" or course == "german":
+        elif course.upper() == "DEUTSCH" or course.upper() == "GERMAN" or course.upper() == "D" or course.upper() == "DE":
             return "D"
-        elif course == "Französisch" or course == "französisch" or course == "French" or course == "french":
+        elif course.upper() == "FRANZÖSISCH" or course.upper() == "FRENCH" or course.upper() == "F" or course.upper() == "FRANZ":
             return "F"
-        elif course == "Erdkunde" or course == "erdkunde" or course == "Geography" or course == "geography":
+        elif course.upper() == "ERDKUNDE" or course.upper() == "GEOGRAPHY" or course.upper() == "EK":
             if int(self.getGrade(id)) >= 11:
                 if main:
                     return "Ek"
@@ -26,7 +26,7 @@ class Contacts(object):
                     return "Eso"
             else:
                 return "Ek"
-        elif course == "Sozialkunde" or course == "sozialkunde" or course == "Politics" or course == "politics":
+        elif course.upper() == "SOZIALKUNDE" or course.upper() == "POLITICS" or course.upper() == "SOZ" or course.upper() == "SK":
             if int(self.getGrade(id)) >= 11:
                 if main:
                     return "Sk"
@@ -34,41 +34,49 @@ class Contacts(object):
                     return "Eso"
             else:
                 return "Sk"
-        elif course == "Chemie" or course == "chemie" or course == "Chemistry" or course == "chemistry":
+        elif course.upper() == "CEHMIE" or course.upper() == "CHEMISTRY" or course.upper() == "CH":
             if int(self.getGrade(id)) >= 7:
                 return "Ch"
             else:
                 return "Nw"
-        elif course == "Ethik" or course == "ethik" or course == "Ethics" or course == "ethics":
+        elif course.upper() == "ETHIK" or course.upper() == "ETHIC" or course.upper() == "ET":
             return "Et"
-        elif course == "Religion" or course == "Religion":
+        elif course.upper() == "RELIGION" or course.upper() == "RELIGION" or course.upper() == "RELI" or course.upper() == "R":
             return "R"
-        elif course == "Biologie" or course == "biologie" or course == "Biology" or course == "biology":
+        elif course.upper() == "KATHOLISCH" or course.upper() == "CATHOLIC" or course.upper() == "KR":
+            return "Kr"
+        elif course.upper() == "EVANGELISCH" or course.upper() == "PROTESTANT" or course.upper() == "ER":
+            return "Er"
+        elif course.upper() == "KATHOLISCHERELIGION" or course.upper() == "CATHOLICRELIGION":
+            return "Kr"
+        elif course.upper() == "EVANGELISCHERELIGION" or course.upper() == "PROTESTANTRELIGION":
+            return "Er"
+        elif course.upper() == "BIOLOGIE" or course.upper() == "BIOLOGY" or course.upper() == "BIO" or course.upper() == "BI":
             if int(self.getGrade(id)) >= 7:
                 return "Bi"
             else:
                 return "Nw"
-        elif course == "Physik" or course == "physik" or course == "Physics" or course == "physics":
+        elif course.upper() == "PHYSIK" or course.upper() == "PHYSICS" or course.upper() == "PH":
             if int(self.getGrade(id)) >= 7:
                 return "ph"
             else:
                 return "Nw"
-        elif course == "Musik" or course == "musik" or course == "Music" or course == "music":
+        elif course.upper() == "MUSIK" or course.upper() == "MUSIC" or course.upper() == "MU":
             return "Mu"
-        elif course == "Kunst" or course == "kunst" or course == "Art" or course == "art":
+        elif course.upper() == "KUNST" or course.upper() == "BILDENDEKUNST" or course.upper() == "ART" or course.upper() == "BK":
             return "Bk"
-        elif course == "Latein" or course == "latein" or course == "Latin" or course == "latin":
+        elif course.upper() == "LATEIN" or course.upper() == "LATIN" or course.upper() == "L":
             return "L"
-        elif course == "Geschichte" or course == "geschichte" or course == "History" or course == "history":
+        elif course.upper() == "GESCHICHTE" or course.upper() == "HISTORY" or course.upper() == "G":
             return "G"
-        elif course == "Informatik" or course == "informatik" or course == "Computer Science" or course == "computer science":
+        elif course.upper() == "INFORMATIK" or course.upper() == "COMPUTERSCIENCE" or course.upper() == "INF" or course.upper() == "IN":
             if main:
                 return "Inf"
             else:
                 return "In"
-        elif course == "Sport" or course == "sport" or course == "Sports" or course == "sports":
+        elif course.upper() == "SPORT" or course.upper() == "SPORTS" or course.upper() == "SP":
             return "Sp"
-        elif course == "Eso" or course == "eso":
+        elif course.upper() == "ESO":
             return "Eso"
         else:
             return False
