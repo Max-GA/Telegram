@@ -55,10 +55,10 @@ class Bot(object):
                 new_Update_ID = self.getUpdateID(new_Result)
                 if new_Update_ID != Update_ID and self.getID(new_Result) == Chat_ID:
                     Name = self.getText(new_Result)
-                    self.sendMessage(Chat_ID, "Nice to meet you , {}!\nYou can see what I can do by typing /help or /commands\nThank you for talking with me :)".format(Name))
+                    self.sendMessage(Chat_ID, "Nice to meet you, {}!\nYou can see what I can do by typing /help or /commands\nThank you for talking with me :)".format(Name))
 
                     if Name == "Julia" or Name == "julia":
-                        self.sendMessage(Chat_ID, "Btw, I think my father loves you\nHe is always talking and thinking about someone named 'Julia' ...\nBut I'm just a robot , what do I know ;)")
+                        self.sendMessage(Chat_ID, "Btw, I think my father loves you\nHe is always talking and thinking about someone named 'Julia' ...\nBut I'm just a robot, what do I know ;)")
 
                     self.Update_ID = new_Update_ID
 
@@ -69,7 +69,7 @@ class Bot(object):
 
     def help(self, Chat_ID):
         Name = self.Contacts.getName(Chat_ID)
-        text = """Hello {} :)\nDon't worry , I'm actually not that complicated :)\nMy name is PyCHT_Bot , named after the language in which I was programmed\nMy creator is a hobby-Coder who brought me to life , if you want to contact him send him a message to Maximilian.Gaurov@web.de\n\nBut enough about my father , let's talk about me :)\n/help ... well ... you typed it so you knew this command already\n/commands will show you everything that I can do\nType /time and I will send you the time , I know not very impressive but it's free so why not\n\nAnd that's it... Not very much but you can try to talk with me normally, maybe I'll respond ;) """.format(Name)
+        text = """Hello {} :)\nDon't worry, I'm actually not that complicated :)\nMy name is PyCHT_Bot, named after the language in which I was programmed\nMy creator is a hobby-Coder who brought me to life, if you want to contact him send him a message to Maximilian.Gaurov@web.de\n\nBut enough about my father, let's talk about me :)\n/help ... well ... you typed it so you knew this command already\n/commands will show you everything that I can do\nType /time and I will send you the time, I know not very impressive but it's free so why not\n\nAnd that's it... Not very much but you can try to talk with me normally, maybe I'll respond ;) """.format(Name)
         self.sendMessage(Chat_ID, text)
 
     def commands(self, Chat_ID):
@@ -80,11 +80,11 @@ class Bot(object):
     def time(self, Chat_ID):
         time_now = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
         if 12 > int(time_now.split(" ")[1].split(":")[0]) >= 0:
-            self.sendMessage(Chat_ID, "Good morning , it is the " + time_now.split(" ")[0] + " and the time is : " + time_now.split(" ")[1])
+            self.sendMessage(Chat_ID, "Good morning, it is the " + time_now.split(" ")[0] + " and the time is : " + time_now.split(" ")[1])
         elif 18 > int(time_now.split(" ")[1].split(":")[0]) >= 12:
-            self.sendMessage(Chat_ID, "Good evening , it is the " + time_now.split(" ")[0] + " and the time is : " + time_now.split(" ")[1])
+            self.sendMessage(Chat_ID, "Good evening, it is the " + time_now.split(" ")[0] + " and the time is : " + time_now.split(" ")[1])
         elif 24 > int(time_now.split(" ")[1].split(":")[0]) >= 18:
-            self.sendMessage(Chat_ID, "Good night , it is the " + time_now.split(" ")[0] + " and the time is : " + time_now.split(" ")[1])
+            self.sendMessage(Chat_ID, "Good night, it is the " + time_now.split(" ")[0] + " and the time is : " + time_now.split(" ")[1])
 
     def school(self, Chat_ID):
         if not self.Contacts.getSchool(Chat_ID):
@@ -92,8 +92,8 @@ class Bot(object):
             Update_ID = self.getUpdateID(Result)
 
             self.sendMessage(Chat_ID, "Okay, before you can use this command I have to know somethings about you and your school!")
-            self.sendMessage(Chat_ID, "At first I'm going to collect some information about your sujects and which grade your in.\nPlease answer the questions correctly\nIf you want to stop this setup , type /stop")
-            self.sendMessage(Chat_ID, "So Please , which grade are you in ?\nA number would be great :)")
+            self.sendMessage(Chat_ID, "At first I'm going to collect some information about your sujects and which grade your in.\nPlease answer the questions correctly\nIf you want to stop this setup, type /stop")
+            self.sendMessage(Chat_ID, "So Please, which grade are you in ?\nA number would be great :)")
 
             grade_done = False
             first_courses = False
@@ -105,10 +105,14 @@ class Bot(object):
                 if new_Update_ID != Update_ID and self.getID(new_Result) == Chat_ID:
                     grade = self.getText(new_Result)
                     if grade != "/stop":
-                        self.sendMessage(Chat_ID, "Okay {}, you are in the {} grade".format(self.Contacts.getName(Chat_ID), grade))
-                        self.Contacts.setGrade(Chat_ID, grade)
-                        Update_ID = new_Update_ID
-                        grade_done = True
+                        if grade <= 13:
+                            self.sendMessage(Chat_ID, "Okay {}, you are in the {} grade".format(self.Contacts.getName(Chat_ID), grade))
+                            self.Contacts.setGrade(Chat_ID, grade)
+                            Update_ID = new_Update_ID
+                            grade_done = True
+                        else:
+                            self.sendMessage(Chat_ID, "Sorry, but you inserted a grade that does not exist\nPlease enter a valid number")
+                            Update_ID = new_Update_ID
                     else:
                         self.sendMessage(Chat_ID, "You stopped the setup\nSorry to bother you")
                         self.Contacts.resetSchool(Chat_ID)
@@ -118,7 +122,7 @@ class Bot(object):
                 if int(self.Contacts.getGrade(Chat_ID)) > 10:
                     self.sendMessage(Chat_ID, "Now I need your Advanced Courses\nPlease write them in the following format:\n\nCourse1 - Number(if important)\nCourse2\nCourse3 - Number(if important)\n...")
                 else:
-                    self.sendMessage(Chat_ID, "Now I need our Main Courses\nPlease write them in the following format:\n\nCourse1 - Number(if important)\nCourse2\nCourse3 - Number(if important)\n...")
+                    self.sendMessage(Chat_ID, "Now I need your Main Courses\nPlease write them in the following format:\n\nCourse1 - Number(if important)\nCourse2\nCourse3 - Number(if important)\n...")
             except ValueError:
                 self.sendMessage(Chat_ID, "Sorry, but I don´t think you've entered a valid grade\nAs I said : a NUMBER would be great :)\nPlease try again")
                 self.Contacts.resetSchool(Chat_ID)
@@ -131,14 +135,14 @@ class Bot(object):
                     courses = self.getText(new_Result)
                     if courses != "/stop":
                         if "\n" in courses:
-                            self.sendMessage(Chat_ID, "Thanks! , Your courses are :")
+                            self.sendMessage(Chat_ID, "Thanks, your courses are :")
                             temp = []
                             for course in courses.split("\n"):
                                 if len(course.split("-")) > 1:
                                     if self.Contacts.shortCourse(Chat_ID, course.split("-")[0].replace(" ","")) != False:
                                         temp.append(self.Contacts.shortCourse(Chat_ID, course.split("-")[0].replace(" ",""))+course.split("-")[1].replace(" ",""))
                                     else:
-                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo , so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
+                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo, so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
                                         self.Contacts.resetSchool(Chat_ID)
                                         self.Update_ID = new_Update_ID
                                         return False
@@ -146,7 +150,7 @@ class Bot(object):
                                     if self.Contacts.shortCourse(Chat_ID, course) != False:
                                         temp.append(self.Contacts.shortCourse(Chat_ID, course))
                                     else:
-                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo , so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
+                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo, so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
                                         self.Contacts.resetSchool(Chat_ID)
                                         self.Update_ID = new_Update_ID
                                         return False
@@ -171,14 +175,14 @@ class Bot(object):
                     courses = self.getText(new_Result)
                     if courses != "/stop":
                         if "\n" in courses:
-                            self.sendMessage(Chat_ID, "Thanks! , Your other courses are :")
+                            self.sendMessage(Chat_ID, "Thanks, your other courses are :")
                             temp = []
                             for course in courses.split("\n"):
                                 if len(course.split("-")) > 1:
                                     if self.Contacts.shortCourse(Chat_ID, course.split("-")[0].replace(" ",""), False) != False:
                                         temp.append(self.Contacts.shortCourse(Chat_ID, course.split("-")[0].replace(" ",""))+course.split("-")[1].replace(" ",""))
                                     else:
-                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo , so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
+                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo, so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
                                         self.Contacts.resetSchool(Chat_ID)
                                         self.Update_ID = new_Update_ID
                                         return False
@@ -186,7 +190,7 @@ class Bot(object):
                                     if self.Contacts.shortCourse(Chat_ID, course, False) != False:
                                         temp.append(self.Contacts.shortCourse(Chat_ID, course))
                                     else:
-                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo , so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
+                                        self.sendMessage(Chat_ID, "You inserted a course that is not in my database, please use only common subjects\nMaybe you also did a Typo, so please be careful when typing your courses\nI'm sorry but you have to do it again :(")
                                         self.Contacts.resetSchool(Chat_ID)
                                         self.Update_ID = new_Update_ID
                                         return False
@@ -200,7 +204,7 @@ class Bot(object):
                         self.Contacts.resetSchool(Chat_ID)
                         self.Update_ID = new_Update_ID
                         return False
-            self.sendMessage(Chat_ID, "Thank you , you finished the setup\nYou can use /school now to see which lessons are changed for the next day !")
+            self.sendMessage(Chat_ID, "Thank you, you finished the setup\nYou can use /school now to see which lessons are changed for the next day !")
             self.Update_ID = Update_ID
         else:
 
