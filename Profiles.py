@@ -34,7 +34,7 @@ class Contacts(object):
                     return "Eso"
             else:
                 return "Sk"
-        elif course.upper() == "CEHMIE" or course.upper() == "CHEMISTRY" or course.upper() == "CH":
+        elif course.upper() == "CHEMIE" or course.upper() == "CHEMISTRY" or course.upper() == "CH":
             if int(self.getGrade(id)) >= 7:
                 return "Ch"
             else:
